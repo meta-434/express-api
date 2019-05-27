@@ -28,7 +28,7 @@ const books = {
 }
 
 
-app.get('/:title', function (req, res) {
+app.get('/book/:title', function (req, res) {
     const ans = books[req.params.title];
     res.send(ans)
 });
