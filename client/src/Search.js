@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import "./App.css";
-import Author from "./Author.js";
 import axios from "axios";
+import { InputGroup, Container } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { FormControl } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
 
 class Search extends Component {
   constructor(props) {
@@ -23,44 +25,43 @@ class Search extends Component {
 
   updateTitle(event) {
     this.setState({ title: this.state.input }, () => {
-      console.log(this.state.title);
       this.passSearch();
-     
     });
   }
-
+  //book?title=
   passSearch() {
     if (this.state.title !== null) {
-      axios.get("/book/" + this.state.title).then(res => {
+      axios.get("/book.v2/" + this.state.title).then(res => {
         console.log(res);
-        this.setState({ author: res.data });
+        this.setState({ author: res.data.author });
       });
     }
   }
 
   render() {
     return (
-      <div>
-          <label>
-            Title:
-            <input
-              type="text"
-              name="title"
-              onChange={e => this.handleInput(e)}
-            />
-          </label>
-          <button
-            type="submit"
-            value="Submit"
-            onClick={e => this.updateTitle(e)}
-          >
-            submit
-          </button>
-        
+      <Container>
+        <h1>Book Search</h1>
+        <InputGroup className="mb-3">
+          <FormControl
+            placeholder="Book Title"
+            aria-label="Book title"
+            aria-describedby="basic-addon2"
+            onChange={e => this.handleInput(e)}
+          />
+          <InputGroup.Append>
+            <Button
+              variant="outline-secondary"
+              onClick={e => this.updateTitle(e)}
+            >
+              Submit
+            </Button>
+          </InputGroup.Append>
+        </InputGroup>
         <p>
-          The author of {this.state.title} is {this.state.author}
+          Input : {this.state.title} Result: {this.state.author}
         </p>
-      </div>
+      </Container>
     );
   }
 }
