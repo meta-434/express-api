@@ -1,4 +1,4 @@
-All of this is deprecated.
+/*All of this is deprecated.*/
 
 // import React, { Component } from "react";
 
