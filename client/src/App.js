@@ -1,17 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
-import Author from './Author.js';
+import Search from "./Search.js";
 
 class App extends Component {
-  state = {
-    title : 'War and Peace'
-  };
-
   render() {
-    //console.log(this.state.title);
-        return (
+    return (
       <div>
-        <Author data={this.state}/>
+        <Search />
       </div>
     );
   }
